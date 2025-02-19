@@ -12,8 +12,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
 String petName = "Your Pet";
 int happinessLevel = 50;
 int hungerLevel = 50;
-// Function to increase happiness and update hunger when playing with
-the pet
+// Function to increase happiness and update hunger when playing with the pet
 void _playWithPet() {
 setState(() {
 happinessLevel = (happinessLevel + 10).clamp(0, 100);
