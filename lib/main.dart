@@ -1,3 +1,5 @@
+//import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -53,6 +55,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     } else {
       happinessLevel = (happinessLevel + 10).clamp(0, 100);
     }
+    _updateMood;
   }
 
   // Increase hunger level slightly when playing with the pet
@@ -62,6 +65,22 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
       hungerLevel = 100;
       happinessLevel = (happinessLevel - 20).clamp(0, 100);
     }
+  }
+
+  // changing mood text
+  String mood = "Neutral";
+  void _updateMood() {
+    setState(() {
+    if (happinessLevel < 30) {
+      mood.replaceAll("Neutral","Unhappy");
+      mood = "Unhappy";
+    } else if (happinessLevel > 70){
+      mood.replaceAll("Neutral","Happy");
+    } else {
+      mood.replaceAll("Happy","Neutral");
+      mood.replaceAll("Unhappy","Neutral");
+    }
+    });
   }
 
   @override
@@ -109,7 +128,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               'assets/pic/dog_pic.jpg'
             ),
             Text(
-              'Name: $petName',
+              'Name: $petName ($mood)',
               style: TextStyle(fontSize: 20.0),
             ),
             SizedBox(height: 16.0),
