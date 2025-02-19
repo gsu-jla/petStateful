@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'dart:async';
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
     home: DigitalPetApp(),
   ));
@@ -11,12 +12,35 @@ class DigitalPetApp extends StatefulWidget {
   _DigitalPetAppState createState() => _DigitalPetAppState();
 }
 
-class _DigitalPetAppState extends State<DigitalPetApp> {
+class _DigitalPetAppState extends State<DigitalPetApp> with WidgetsBindingObserver {
   String petName = "";
   bool isNameSet = false;
   int happinessLevel = 50;
   int hungerLevel = 50;
   Color backgroundColor = Colors.red;
+  late Timer _hungerTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    startHungerTimer();
+  }
+
+  void startHungerTimer() {
+    
+    _hungerTimer = Timer.periodic(Duration(seconds: 30), (timer) {
+      setState(() {
+        hungerLevel = (hungerLevel + 10).clamp(0, 100);
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _hungerTimer.cancel();
+    super.dispose();
+  }
 
   // Function to increase happiness and update hunger when playing with the pet
   void _playWithPet() {
