@@ -19,8 +19,7 @@ happinessLevel = (happinessLevel + 10).clamp(0, 100);
 _updateHunger();
 });
 }
-// Function to decrease hunger and update happiness when feeding the
-pet
+// Function to decrease hunger and update happiness when feeding the pet
 void _feedPet() {
 setState(() {
 hungerLevel = (hungerLevel - 10).clamp(0, 100);
