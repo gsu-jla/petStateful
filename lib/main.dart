@@ -105,6 +105,9 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
         ) : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset(
+              'assets/pic/dog_pic.jpg'
+            ),
             Text(
               'Name: $petName',
               style: TextStyle(fontSize: 20.0),
