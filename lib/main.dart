@@ -12,7 +12,8 @@ class DigitalPetApp extends StatefulWidget {
 }
 
 class _DigitalPetAppState extends State<DigitalPetApp> {
-  String petName = "Your Pet";
+  String petName = "";
+  bool isNameSet = false;
   int happinessLevel = 50;
   int hungerLevel = 50;
   Color backgroundColor = Colors.red;
@@ -71,7 +72,37 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
         title: Text('Digital Pet'),
       ),
       body: Center(
-        child: Column(
+        child: !isNameSet ? Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Container(
+                width: 300,
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Enter Pet Name',
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      petName = value;
+                    });
+                  },
+                ),
+              ),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: petName.isEmpty ? null : () {
+                setState(() {
+                  isNameSet = true;
+                });
+              },
+              child: Text('Confirm Name'),
+            ),
+          ],
+        ) : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
